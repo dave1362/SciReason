@@ -283,7 +283,10 @@ class OpenAI(BaseAPIModel):
                 if self.proxy_url is None:
                     raw_response = requests.post(url,
                                                  headers=header,
-                                                 data=json.dumps(data))
+                                                 data=json.dumps(data),
+                                                timeout=15000,  # 固定超时时间为 15000 秒
+                                                verify=False  # 关闭 SSL 证书验证（解决 InsecureRequestWarning）
+                    )
                 else:
                     proxies = {
                         'http': self.proxy_url,
@@ -297,6 +300,8 @@ class OpenAI(BaseAPIModel):
                         headers=header,
                         data=json.dumps(data),
                         proxies=proxies,
+                        timeout=15000,  # 固定超时时间为 15000 秒
+                        verify=False  # 关闭 SSL 证书验证（解决 InsecureRequestWarning）
                     )
 
                     if self.verbose:

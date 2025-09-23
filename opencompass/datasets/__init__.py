@@ -1,3 +1,16 @@
+# science-bench
+from .LLM4Chem import *
+from .GUE import *
+from .uncond_RNA import *
+from .uncond_material import *
+from .LLM4Mat import *
+from .unconditional_protein_generation import *
+from .unconditional_molecule_generation import *
+from .PEER import *
+from .Mol_Instructions import *
+from .opi import *
+from .ChemBenchQA import *  # noqa: F401, F403
+
 from .advglue import *  # noqa: F401, F403
 from .afqmcd import *  # noqa: F401, F403
 from .agieval import *  # noqa: F401, F403
@@ -172,3 +185,6 @@ from .xcopa import *  # noqa: F401, F403
 from .xiezhi import XiezhiDataset, XiezhiRetriever  # noqa: F401, F403
 from .xlsum import *  # noqa: F401, F403
 from .xsum import *  # noqa: F401, F403
+from .composition_material import * 
+from .bulk_modulus_material import * 
+from .bio_instruction import *

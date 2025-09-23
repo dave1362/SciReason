@@ -1,3 +1,4 @@
+*.whl
 .DS_Store
 output_*/
 outputs/
@@ -133,3 +134,9 @@ turbomind/
 
 # aliyun
 core.*
+
+!requirements/training.txt
+
+sft/
+
+local/

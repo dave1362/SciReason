@@ -127,7 +127,7 @@ def _get_meta_template(meta_template):
 def _set_model_kwargs_torch_dtype(model_kwargs):
     import torch
     if 'torch_dtype' not in model_kwargs:
-        torch_dtype = torch.float16
+        torch_dtype = torch.float
     else:
         torch_dtype = {
             'torch.float16': torch.float16,

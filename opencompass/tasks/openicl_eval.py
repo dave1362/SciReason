@@ -108,13 +108,18 @@ class OpenICLEvalTask(BaseTask):
         test_set = build_dataset_from_cfg(self.dataset_cfg).test
         # Postprocess dataset if necessary
         if 'dataset_postprocessor' in self.eval_cfg:
-            proc = self.eval_cfg['dataset_postprocessor']['type']
+            # 1. Copy the entire configuration dictionary to preserve it.
+            kwargs = copy.deepcopy(self.eval_cfg['dataset_postprocessor'])
+            # 2. Pop the 'type' to get the processor. The rest of the dict is now our kwargs.
+            proc = kwargs.pop('type')
             if isinstance(proc, str):
                 proc = TEXT_POSTPROCESSORS.get(proc)
 
             def postprocess(sample):
                 s = sample[self.output_column]
-                sample[self.output_column] = proc(s)
+                # 3. Call the processor with the text `s` and unpack the rest of the
+                #    config dictionary as keyword arguments.
+                sample[self.output_column] = proc(s, **kwargs)
                 return sample
 
             test_set = test_set.map(postprocess)

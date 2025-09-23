@@ -1,0 +1,31 @@
+# There are some mirror sites which may help speed up the installation, you can annotate them if not needed.
+# --index-url https://pypi.tuna.tsinghua.edu.cn/simple
+# -f https://mirrors.aliyun.com/pytorch-wheels/cu124
+--extra-index-url https://download.pytorch.org/whl/cu124
+
+ms-swift==3.4.0
+
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
+
+nvitop
+liger_kernel==0.5.9
+deepspeed
+qwen_vl_utils
+qwen_omni_utils
+decord
+librosa
+icecream
+soundfile
+fire
+biopython
+rdkit
+rouge_score
+selfies
+Levenshtein
+glob
+
+# flash_attn==2.7.1
+# flash_attn-2.7.1.post4+cu12torch2.6cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.1.post4/flash_attn-2.7.1.post4+cu12torch2.6cxx11abiFALSE-cp310-cp310-linux_x86_64.whl

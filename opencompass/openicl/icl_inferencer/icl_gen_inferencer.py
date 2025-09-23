@@ -59,6 +59,7 @@ class GenInferencer(BaseInferencer):
             output_json_filepath: Optional[str] = './icl_inference_output',
             output_json_filename: Optional[str] = 'predictions',
             save_every: Optional[int] = 1,
+            generation_kwargs: Optional[dict] = None, # Add this line
             **kwargs) -> None:
         super().__init__(
             model=model,
@@ -78,6 +79,8 @@ class GenInferencer(BaseInferencer):
         if self.model.is_api and save_every is None:
             save_every = 1
         self.save_every = save_every
+
+        self.generation_kwargs = generation_kwargs or {}
 
     def inference(self,
                   retriever: BaseRetriever,
@@ -142,7 +145,8 @@ class GenInferencer(BaseInferencer):
                 entry = datum
                 golds = [None for _ in range(len(entry))]
             # 5-1. Inference with local model
-            extra_gen_kwargs = {}
+            # extra_gen_kwargs = {}
+            extra_gen_kwargs = self.generation_kwargs.copy() # modify this line
             sig = inspect.signature(self.model.generate)
             if 'stopping_criteria' in sig.parameters:
                 extra_gen_kwargs['stopping_criteria'] = self.stopping_criteria
@@ -154,8 +158,13 @@ class GenInferencer(BaseInferencer):
                     entry, max_out_len=self.max_out_len, **extra_gen_kwargs)
                 generated = results
 
-            num_return_sequences = getattr(self.model, 'generation_kwargs',
-                                           {}).get('num_return_sequences', 1)
+            # modify this line
+            if 'num_return_sequences' in self.generation_kwargs:
+                num_return_sequences = self.generation_kwargs['num_return_sequences']
+            else:
+                num_return_sequences = getattr(self.model, 'generation_kwargs',
+                                            {}).get('num_return_sequences', 1)
+            print(f"num_return_sequences: {num_return_sequences}")
             # 5-3. Save current output
             for prompt, prediction, gold in zip(
                     parsed_entries, batched(generated, num_return_sequences),
