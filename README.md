@@ -1,6 +1,6 @@
 # SciReasoner: Laying the Scientific Reasoning Ground Across Disciplines
 
-[![arXiv](https://img.shields.io/badge/arXiv-Pending-B31B1B)](#)
+[![arXiv](https://img.shields.io/badge/arXiv-2509.21320-B31B1B)](https://arxiv.org/abs/2509.21320)
 [![Hugging Face](https://img.shields.io/badge/HuggingFace-SciReason-FFAE1A)](https://huggingface.co/SciReason)
 [![License](https://img.shields.io/badge/License-Apache_2.0-2D7DB1.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
